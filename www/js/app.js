@@ -24,7 +24,10 @@ angular.module('starter', ['ionic'])
 })
 
 .controller('TodoCtrl', function($scope, $ionicModal) {
-  $scope.tasks = [];
+  $scope.tasks = [
+    {title:"default todo task", done:false},
+    {title:"default done task", done:true},
+  ];
 
   $ionicModal.fromTemplateUrl('lib/new-task.html', function(modal) {
     $scope.taskModal = modal;
@@ -34,10 +37,12 @@ angular.module('starter', ['ionic'])
 
   $scope.createTask = function(task) {
     $scope.tasks.push({
-      title: task.title
+      title: task.title,
+      done: false
     });
     $scope.taskModal.hide();
     task.title = "";
+    task.done = false;
   };
 
   $scope.newTask = function() {
