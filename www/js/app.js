@@ -22,3 +22,12 @@ angular.module('starter', ['ionic'])
     }
   });
 })
+
+.controller('TodoCtrl', function($scope) {
+  $scope.tasks = [
+    {title: "task1", description: "desc1"},
+    {title: "task2", description: "desc2"},
+    {title: "task3", description: "desc3"},
+    {title: "task4", description: "desc4"}
+  ];
+})
