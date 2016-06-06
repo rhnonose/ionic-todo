@@ -23,11 +23,29 @@ angular.module('starter', ['ionic'])
   });
 })
 
-.controller('TodoCtrl', function($scope) {
-  $scope.tasks = [
-    {title: "task1", description: "desc1"},
-    {title: "task2", description: "desc2"},
-    {title: "task3", description: "desc3"},
-    {title: "task4", description: "desc4"}
-  ];
+.controller('TodoCtrl', function($scope, $ionicModal) {
+  $scope.tasks = [];
+
+  $ionicModal.fromTemplateUrl('lib/new-task.html', function(modal) {
+    $scope.taskModal = modal;
+  }, {
+    scope: $scope
+  });
+
+  $scope.createTask = function(task) {
+    $scope.tasks.push({
+      title: task.title
+    });
+    $scope.taskModal.hide();
+    task.title = "";
+  };
+
+  $scope.newTask = function() {
+    $scope.taskModal.show();
+  };
+
+  $scope.closeNewTask = function() {
+    $scope.taskModal.hide();
+  };
+
 })

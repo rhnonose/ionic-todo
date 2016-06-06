@@ -25,7 +25,10 @@
 
     <ion-pane>
       <ion-header-bar class="bar-stable">
-        <h1 class="title">Ionic Blank Starter</h1>
+        <h1 class="title">My Todo List</h1>
+        <button class="button button-icon" ng-click="newTask()">
+          <i class="icon ion-compose"></i>
+        </button>
       </ion-header-bar>
       <ion-content>
         <ion-item ng-repeat="task in tasks">
