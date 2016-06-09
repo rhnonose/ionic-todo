@@ -24,10 +24,12 @@ angular.module('starter', ['ionic'])
 })
 
 .controller('TodoCtrl', function($scope, $ionicModal) {
-  $scope.tasks = [
-    {title:"default todo task", done:false},
-    {title:"default done task", done:true},
-  ];
+  var localStorage = window['localStorage'];
+  console.log(localStorage);
+  if(!localStorage.getItem('tasks')){
+    localStorage.setItem('tasks', JSON.stringify([]));
+  }
+  $scope.tasks = JSON.parse(localStorage.getItem("tasks"));
 
   $ionicModal.fromTemplateUrl('lib/new-task.html', function(modal) {
     $scope.taskModal = modal;
@@ -40,6 +42,7 @@ angular.module('starter', ['ionic'])
       title: task.title,
       done: false
     });
+    localStorage.setItem("tasks", JSON.stringify($scope.tasks));
     $scope.taskModal.hide();
     task.title = "";
     task.done = false;
@@ -53,4 +56,7 @@ angular.module('starter', ['ionic'])
     $scope.taskModal.hide();
   };
 
+  $scope.saveLocalStorage = function(){
+    localStorage.setItem("tasks", JSON.stringify($scope.tasks));
+  };
 })

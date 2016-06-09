@@ -31,7 +31,7 @@
         </button>
       </ion-header-bar>
       <ion-content>
-        <ion-toggle toggle-class="toggle-calm" ng-repeat="task in tasks" ng-checked="task.done">
+        <ion-toggle toggle-class="toggle-calm" ng-repeat="task in tasks" ng-model="task.done" ng-checked="task.done" ng-change="saveLocalStorage()">
           {{task.title}}
         </ion-toggle>
       </ion-content>
