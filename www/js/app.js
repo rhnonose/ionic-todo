@@ -23,13 +23,8 @@ angular.module('starter', ['ionic'])
   });
 })
 
-.controller('TodoCtrl', function($scope, $ionicModal) {
-  var localStorage = window['localStorage'];
-  console.log(localStorage);
-  if(!localStorage.getItem('tasks')){
-    localStorage.setItem('tasks', JSON.stringify([]));
-  }
-  $scope.tasks = JSON.parse(localStorage.getItem("tasks"));
+.controller('TodoCtrl', function($scope, $ionicModal, localStorageService) {
+  $scope.tasks = localStorageService.retrieveArray('tasks');
 
   $ionicModal.fromTemplateUrl('lib/new-task.html', function(modal) {
     $scope.taskModal = modal;
@@ -42,9 +37,9 @@ angular.module('starter', ['ionic'])
       title: task.title,
       done: false
     });
-    localStorage.setItem("tasks", JSON.stringify($scope.tasks));
+    localStorageService.saveArray('tasks', $scope.tasks);
     $scope.taskModal.hide();
-    task.title = "";
+    task.title = '';
     task.done = false;
   };
 
@@ -57,6 +52,19 @@ angular.module('starter', ['ionic'])
   };
 
   $scope.saveLocalStorage = function(){
-    localStorage.setItem("tasks", JSON.stringify($scope.tasks));
+    localStorageService.saveArray('tasks', $scope.tasks);
   };
+})
+
+.service('localStorageService', function(){
+  this.retrieveArray = function(name){
+    var toReturn = window['localStorage'][name];
+    if(toReturn){
+      return JSON.parse(toReturn);
+    }
+    return [];
+  };
+  this.saveArray = function(name, data){
+    window['localStorage'][name] = JSON.stringify(data);
+  }
 })
