@@ -54,6 +54,13 @@ angular.module('starter', ['ionic'])
   $scope.saveLocalStorage = function(){
     localStorageService.saveArray('tasks', $scope.tasks);
   };
+
+  $scope.clearDone = function(){
+    $scope.tasks = $scope.tasks.filter(function (task){
+      return !task.done;
+    });
+    $scope.saveLocalStorage();
+  };
 })
 
 .service('localStorageService', function(){

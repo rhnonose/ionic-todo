@@ -26,7 +26,10 @@
     <ion-pane>
       <ion-header-bar class="bar-stable">
         <h1 class="title">My Todo List</h1>
-        <button class="button button-icon" ng-click="newTask()">
+        <button title="Clear Done" class="button button-icon" ng-click="clearDone()">
+          <i class="icon ion-close-circled"></i>
+        </button>
+        <button title="New Task" class="button button-icon" ng-click="newTask()">
           <i class="icon ion-compose"></i>
         </button>
       </ion-header-bar>
